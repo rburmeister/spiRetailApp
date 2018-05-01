@@ -1,0 +1,34 @@
+
+
+<div class="provider-form">
+		<h1>Signup</h1>
+<form class="form-inline" name="register-signup">
+		<div class="row">
+      		<label for="name">Email</label>
+      		<input type="text" class="form-control" ng-model="uEmail" placeholder="Enter email"/>
+      		<span ng-show="uEmail.$error.email" class="help-inline">Email is not valid</span>
+		</div>
+		<div class="row">
+      		<label for="name">Password</label>
+      		<input type="text" class="form-control" ng-model="uPassword" placeholder="Enter password" required/>
+      		<small class="errorMessage" data-ng-show="uPassword.$dirty && uPassword.$invalid"> Enter Password.</small>
+		</div>
+		<div class="row">
+      		<label for="name">Password</label>
+
+      		<input type="text" class="form-control" 
+      		ng-model="uPassword2" 
+      		placeholder="Enter password"
+      		password-match="uPassword" required/>
+
+      		<small class="errorMessage" data-ng-show="uPassword2.$dirty && uPassword2.$error.required"> Enter password again.</small>
+
+                               <small class="errorMessage" data-ng-show="uPassword2.$dirty && uPassword2.$error.passwordNoMatch && uPassword2.$error.required"> Password do not match.</small>
+		</div>
+		<div class="row">
+      		<button type="button" ng-click="register()">Submit</button>
+		</div>
+</form>
+</div>
+
+<!--<input type="text" class="form-control" ng-model="itemInput" placeholder="Enter email address" />-->

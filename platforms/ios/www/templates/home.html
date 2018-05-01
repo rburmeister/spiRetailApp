@@ -1,0 +1,170 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:400px;
+		width:100%;
+	}
+
+	.home {
+		float:left;
+		width:100%;
+		position:relative;
+		margin:20px 0 0 0;
+	}
+
+	.form {
+		float:left;
+		width:100%;
+		position:relative;
+		background:#00a8b4;
+	}
+
+	.home .form {
+		background:#fff;
+	}
+
+	.form .row-50 {
+		display:block;
+		float:left;
+		width:calc(50% - 10px);
+		border:4px solid #efefef;
+		border-radius:5px;
+		margin:10px;
+		padding:30px 0;
+		background:#fff;
+	}
+
+	.form .row-50:active {
+		background:#efefef;
+	}
+
+	.form .row-50:nth-child(1){
+		margin:10px 10px 10px 0;
+	}
+
+	.form .row-50:nth-child(2){
+		margin:10px 0 10px 10px;
+	}
+
+	.form .row-50:nth-child(3){
+		margin:10px 10px 10px 0;
+	}
+
+	.form .row-50:nth-child(4){
+		margin:10px 0 10px 10px;
+	}
+
+	.form .row-50 span {
+		display:block;
+		float:left;
+		width:100%;
+		text-align:center;
+		color:#38acb3;
+		font-size:16px;
+		font-weight:bold;
+	}
+
+	.form .row-50 img {
+	    display: block;
+	    margin: -5px auto 5px;
+	    max-width: 60px;
+	}
+
+	.btn-txt {
+	    margin: 0 0 0 10px;
+	    font-size: 18px;
+	    color: #9a9b9c;
+	    padding: 5px 10px;
+	    background: none;
+	    border: none;
+	}
+
+	#change-store {
+	    position: absolute;
+	    bottom: 20px;
+	    left: 0;
+	    width: 100%;
+	    text-align: center;
+	    color: #9a9b9c;
+	    padding: 10px 0;
+	}
+
+	.alert {
+	    width: 100%;
+	    height: 40px;
+	    position: fixed;
+	    background: #4d4f53;
+	    z-index: 11;
+	    top: 0;
+	    padding: 0 20px;
+	    line-height: 40px;
+	    color: #fff;
+	    font-size: 14px;
+	    transform:translateY(-40px);
+	}
+
+	.alert span {
+		display:block;
+		height: 40px;
+	    line-height: 40px;
+	}
+
+	.alert span:first-letter {
+		text-transform:capitalize;
+	}
+	.active.alert {
+		animation: alertDown .45s; 
+		animation-fill-mode: forwards;
+	}
+
+
+</style>
+
+
+<!-- Container -->
+<div class="container">
+	<!-- Home -->
+	<div class="home">
+
+		<!-- Go Back Shortcut 
+		<button class="btn-txt" ng-click="goBack()">< Go Back</button>-->
+
+		<!-- Home Button  / Actions  -->
+		<div class="form">
+			<!-- Scan Products -->
+			<button ng-click="scanBarcode()" 
+					class="row row-50">
+				<img src="images/barcode-icon.png" alt="ICON" class="btn-icon"/>
+				<span>Scan Products</span>
+			</button>
+			<!-- Search Products -->
+			<button ng-click="changeView('search-inventory')"  
+					class="row row-50">
+				<img src="images/search-icon.png" alt="ICON" class="btn-icon"/>
+				<span>Search Products</span>
+			</button>
+			<!-- Order Tracking -->
+			<button ng-click="changeView('order-status')" 
+					class="row row-50">
+				<img src="images/order-tracking-icon.png" alt="ICON" class="btn-icon"/>
+				<span>Order Tracking</span>
+			</button>
+			<!-- Pay Invoices -->
+			<button ng-click="changeView('pay-invoices')" 
+					class="row row-50">
+				<img src="images/pay-invoices-icon.png" alt="ICON" class="btn-icon"/>
+				<span>Pay Invoices</span>
+			</button>
+		</div>
+		<!-- End of Form -->
+	</div>
+	<!-- End of Home -->
+	<!-- Change Store -->
+	<span id="change-store" ng-click="changeView('select-store')" ng-if="multipleStores">Shop for a different store?</span>
+</div>
+<!-- End of Container -->
+
+<div class="alert" ng-class="{'active' : serverError}">
+	<span>{{errorMsg}}</span>
+</div>

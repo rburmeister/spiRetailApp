@@ -1,0 +1,167 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:350px;
+		width:100%;
+	}
+
+	.select-store {
+		float:left;
+		width:100%;
+		position:relative;
+		margin:20px 0 0;
+	}
+
+	.form {
+		float:left;
+		width:100%;
+		position:relative;
+		background:#00a8b4;
+		padding:20px;
+		border-radius:10px;
+	}
+
+	.form .row {
+		float:left;
+		width:100%;
+		position:relative;
+	}
+
+	.form label {
+		display:block;
+		margin:0 0 5px 0;
+		font-size:18px;
+		color:#fff;
+	}
+
+	.form .inline.row label {
+		display:inline-block;
+		margin: 15px 0 0 10px;
+	}
+
+	.form input {
+		display:block;
+		width:100%;
+		height:40px;
+		line-height:40px;
+		padding:0 0 0 10px;
+		margin:0 0 20px 0;
+		background:#fff;
+		border-radius:5px;
+	}
+
+	.form select {
+		display:block;
+		float:left;
+		width:100%;
+		margin:5px 0 20px 0;
+		padding:5px 0 5px 10px;
+		height:40px;
+		font-size:16px;
+		background:#fff;
+		border:none;
+		position:relative;
+		-webkit-appearance: none;
+	}
+
+	.row-select:after {
+		content: '\0276F';
+		background-size: 20px 20px;
+		position:absolute;
+		font-size:26px;
+		font-weight:bold;
+		transform:rotate(90deg);
+		right:10px;
+		top:38px;
+		z-index:11;
+		color:#00a8b4;
+		width:20px;
+	}
+
+	.form button {
+		display:block;
+		position:relative;
+		float:left;
+		width:100%;
+		background:#92d402;
+		border:none;
+		color:#fff;
+		border-radius:10px;
+		font-size:18px;
+		height:40px;
+		line-height:40px;
+	}
+
+	.form button .btn-icon {
+		display:inline-block;
+		font-size:22px;
+
+	}
+
+	.form button:active {
+		background:#Fff;
+		color:#92d402;
+	}
+
+	.alert {
+	    width: 100%;
+	    height: 40px;
+	    position: fixed;
+	    background: #D34040;
+	    z-index: 11;
+	    top: 0;
+	    padding: 0 20px;
+	    line-height: 40px;
+	    color: #fff;
+	    font-size: 14px;
+	    transform:translateY(-40px);
+	}
+
+	.alert span {
+		display:block;
+		height: 40px;
+	    line-height: 40px;
+	}
+
+	.alert span:first-letter {
+		text-transform:capitalize;
+	}
+	.active.alert {
+		animation: alertDown .45s; 
+		animation-fill-mode: forwards;
+	}
+
+</style>
+
+
+<div class="alert" ng-class="{'active' : serverError}">
+	<span>{{errorMsg}}</span>
+</div>
+<!-- Container -->
+<div class="container">
+	<!-- Loader -->
+	<page-loader ng-if="pageLoading"></page-loader>
+	<!-- Select Store -->
+	<div class="select-store" ng-if="!pageLoading">
+		<!-- Select Store Form -->
+		<div class="form">
+			<div class="row row-select">
+				<label for="storeSelect">Select A Store</label>
+				 <select name="storeSelect" 
+				 		ng-model="selectedStore">
+      				<option ng-repeat="store in stores" value="{{store.storeId}}">{{store.storeName}}</option>
+      				<option style="display:none" value="">Select A Store</option>
+   				 </select>
+			</div>
+			<div class="row">
+				<button type="submit" ng-click="selectStore(selectedStore)">
+					Continue <span class="btn-icon">&#10095;</span>
+				</button>
+			</div>
+		</div>
+		<!-- End of Form -->
+	</div>
+	<!-- End of Select Store -->
+</div>
+<!-- End of Container -->

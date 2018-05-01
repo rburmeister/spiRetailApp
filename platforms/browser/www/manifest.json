@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "SPI Retail",
+  "short_name": "SPI Retail",
+  "version": "com.phonegap.spiretailapp",
+  "description": "SPI Retail",
+  "author": "SPI Retail",
+  "icons": [],
+  "start_url": "http://localhost:8080"
+}

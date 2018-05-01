@@ -1,0 +1,272 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:350px;
+		width:100%;
+	}
+
+	.product-details {
+		float:left;
+		width:100%;
+		position:relative;
+		padding:0 0 60px 0;
+	}
+
+	.product-details .product {
+		float:left;
+		width:100%;
+		margin:0 0 20px 0;
+	}
+
+	.product-details .product .img {
+		float:left;
+		width:50%;
+		margin:0 10px 0 0;
+		max-height:150px;
+		overflow:hidden;
+	}
+
+	.product-details .img img {
+		display:block;
+		width:100%;
+	}
+
+	.product-summary {
+		float:right;
+		width:calc(50% - 10px);
+	}
+
+	.product-summary .headline, .product-summary .details, .product-summary .price {
+		display:block;
+		width:100%;
+		float:left;
+		margin:0 0 15px 0;
+	}
+
+	.product-summary .headline {
+		font-weight:bold;
+		font-size:20px;
+	}
+
+	.product-summary .price {
+		color:#92d402;
+		font-size:18px;
+		font-weight:bold;
+	}
+
+	.product-details .size {
+		float:left;
+		width:100%;
+		padding:5px 8px;
+		margin:0 0 10px 0;
+		border:2px solid #ccc;
+		border-radius:5px;
+	}
+
+	.product-details .details {
+		font-size:18px;
+		line-height:1.1;
+	}
+
+
+	.product-details .size .size-details {
+		float:left;
+	}
+
+	.product-details .size .size-details span:first-child {
+		display:block;
+		font-weight:bold;
+		margin:3px 0 5px 0;
+		font-size:18px;
+	}
+
+	.product-details .size .size-details span {
+		font-size:14px;
+	}
+
+	.size-actions {
+		float:right;
+	}
+
+	.size-actions input, .size-actions button {
+		display:block;
+		float:left;
+		height:40px;
+		width:40px;
+		line-height:40px;
+		border-radius:5px;
+		background:#00a8b4;
+		color:#fff;
+		margin:5px 5px 0 0;
+		font-size:18px;
+		border:none;
+		font-weight: bold;
+		-webkit-appearance:none;
+	}
+
+	.size-actions input {
+		background:#fff;
+		border:2px solid #ccc;
+		color:#000;
+		text-align:center;
+		font-size:14px;
+	}
+
+	.size-actions button:last-child {
+		margin:5px 0 0 0;
+	}
+
+	.size-actions button:active {
+		background:#92d402;
+	}
+
+	.invoice-bar {
+		position:fixed;
+		left:0;
+		bottom:0;
+		width:100%;
+		background:#00a8b4;
+		height:60px;
+		box-shadow: 0px -4px 10px -2px rgba(0,0,0,0.05);
+	}
+
+	.invoice-bar label {
+		display:block;
+		float:left;
+		color:#fff;
+		line-height:60px;
+		font-size:18px;
+		padding:0 0 0 20px;
+	}
+
+	.invoice-bar input, .invoice-bar span {
+	    display: block;
+	    float: left;
+	    height: 60px;
+	    line-height: 60px;
+	    width: 120px;
+	    padding: 0 0 0 10px;
+	    border-radius:10px;
+	    border:none;
+	    background:none;
+	    color:#fff;
+	    font-size:18px;
+	}
+
+	.invoice-bar span {
+		width:auto;
+	}
+
+	.invoice-bar input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  color: #fff;
+	  font-size:14px;
+	  letter-spacing:0.5px;
+	  font-weight:300;
+	}
+
+	.invoice-bar button {
+		display:block;
+		float:right;
+		height:40px;
+		line-height:30px;
+		padding:0 20px;
+		border-radius:10px;
+		background:#92d402;
+		color:#fff;
+		border:none;
+		margin:10px 20px 0 0;
+		font-size:18px;
+	}
+
+	.invoice-bar button:hover, .invoice-bar button:active {
+		background:#7fb902;
+	}
+
+	.alert {
+	    width: 100%;
+	    height: 40px;
+	    position: fixed;
+	    background: #4d4f53;
+	    z-index: 11;
+	    top: 0;
+	    padding: 0 20px;
+	    line-height: 40px;
+	    color: #fff;
+	    font-size: 14px;
+	    transform:translateY(0);
+	}
+
+	.alert a {
+		display:block;
+		float:right;
+		padding:0 15px;
+		background:#ccc;
+		color:#fff;
+		background:#00a8b4;
+		height:26px;
+		line-height:26px;
+		text-decoration: none;
+		margin:7px 0 0 0;
+		border-radius:5px;
+	}
+
+	.alert a:hover, .alert a:active {
+		background:#7fb902;
+	}
+
+	.active.alert {
+		animation: alertDown .45s; 
+		animation-fill-mode: forwards;
+	}
+
+</style>
+
+<div class="alert" ng-class="{'active' : success}">
+	<span>Item(s) were added to your cart.</span>
+	<a href="#place-order">Checkout</a>
+</div>
+<!-- Container -->
+<div class="container">
+	<!-- Product Details -->
+	<div class="product-details">
+		<!-- Product Summary -->
+		<div class="product">
+			<div class="img">
+				<img src="{{product[0].imgUrl}}{{product[0].style}}_{{product[0].color}}.JPG" alt="" />
+			</div>
+			<div class="product-summary">
+				<span class="headline">{{product[0].description}}</span>
+				<span class="details">{{product[0].fabric}}</span>
+				<span class="price">${{product[0].lowPrice | number:2}} - ${{product[0].highPrice | number:2}}</span>
+			</div>
+		</div>
+		<!-- End of Product Summary -->
+		<!-- Product Sizes -->
+		<div class="product-sizes">
+			<div class="size stagger stagger-fade-up" ng-repeat="item in product" ng-if="!$first">
+				<div class="size-details">
+					<span>{{item.size}}</span>
+					<span>Available Products: {{item.availability}}</span>
+				</div>
+				<div class="size-actions">
+					<button type="button" ng-click="decreaseQty(item)">-</button>
+					<input type="number" placeholder="0" ng-model="item.unitsInCart" class="qty-amount" />
+					<button type="button" ng-click="increaseQty(item)">+</button>
+				</div>
+			</div>
+		</div>
+		<!-- End of Product Sizes -->
+		<!-- Add To Cart -->
+		<div class="invoice-bar">
+			<label>Subtotal:</label>
+			<span>{{subtotal | currency}}</span>
+			<!--<input type="text" 
+					ng-model="subtotal"
+					placeholder="$0.00" disabled />-->
+			<button type="submit" ng-click="addToCart(item)">Add To Cart</button>
+		</div>
+	</div>
+	<!-- End of Search Inventory -->
+</div>
+<!-- End of Container -->

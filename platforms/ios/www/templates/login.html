@@ -1,0 +1,188 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:350px;
+		width:100%;
+	}
+
+	.login {
+		float:left;
+		width:100%;
+		position:relative;
+	}
+
+	.login .logo {
+		float:left;
+		width:100%;
+		margin:0 0 30px;
+	}
+
+	.login .logo h1 {
+		display:block;
+		margin:0 auto;
+		margin-bottom:10px;
+	}
+
+	.login .logo span {
+		display:block;
+		width:100%;
+		text-align:center;
+		font-size:12px;
+		position:absolute;
+		top:42px;
+	}
+
+	.form {
+		float:left;
+		width:100%;
+		position:relative;
+		background:#00a8b4;
+		padding:20px;
+		border-radius:10px;
+	}
+
+	.form .row {
+		float:left;
+		width:100%;
+	}
+
+	.form label {
+		display:block;
+		margin:0 0 5px 0;
+		font-size:14px;
+		color:#fff;
+	}
+
+	.form .inline.row label {
+		display:inline-block;
+		margin: 6px 0 0 10px;
+		font-size:18px;
+	}
+
+	.form input {
+		display:block;
+		width:100%;
+		height:40px;
+		line-height:20px;
+		padding:0 0 0 10px;
+		margin:0 0 20px 0;
+		background:#fff;
+		border-radius:5px;
+		border:none;
+		font-size:18px;
+		text-transform: lowercase;
+	}
+
+	.form .chkbox {
+		display:inline-block;
+		width:25px;
+		height:25px;
+		float:left;
+		margin:0;
+	}
+
+	.form button {
+		display:block;
+		float:left;
+		width:100%;
+		background:#92d402;
+		border:none;
+		color:#fff;
+		padding:10px 0;
+		border-radius:10px;
+		font-size:18px;
+		margin:15px 0 0 0;
+	}
+
+	.error-msg {
+	    position: absolute;
+	    bottom: -25px;
+	    text-align: left;
+	    width: 100%;
+	    left: 20px;
+	    color: #4d4f53;
+	    font-style: italic;
+	    font-weight: bold;
+	    letter-spacing: 0.25px;
+	    word-spacing: -1px;
+	    font-size: 14px;
+	}
+
+	.alert {
+	    width: 100%;
+	    height: 40px;
+	    position: fixed;
+	    background: #D34040;
+	    z-index: 11;
+	    top: 0;
+	    padding: 0 20px;
+	    line-height: 40px;
+	    color: #fff;
+	    font-size: 14px;
+	    transform:translateY(-40px);
+	}
+
+	.alert span {
+		display:block;
+		height: 40px;
+	    line-height: 40px;
+	}
+
+	.alert span:first-letter {
+		text-transform:capitalize;
+	}
+	.active.alert {
+		animation: alertDownLogin .45s; 
+		animation-fill-mode: forwards;
+	}
+
+</style>
+
+<div class="alert" ng-class="{'active' : serverError}">
+	<span>{{errorMsg}}</span>
+</div>
+<!-- Container -->
+<div class="container">
+	<!-- Loader -->
+	<page-loader ng-if="pageLoading"></page-loader>
+	<!-- Login -->
+	<div class="login" ng-if="!pageLoading">
+		<!-- Company Logo -->
+		<div class="logo">
+			<brand-logo></brand-logo>
+			<span>Version 1.0.0</span>
+		</div>
+		<!-- User Login Form -->
+		<div class="form">
+			<span class="error-msg" ng-if="!formValid">{{errorMsg}}</span>
+			<div class="row">
+				<label>Username</label>
+				<input type="text" 
+				ng-init="username"
+				ng-model="item.username" 
+				placeholder="Enter username" />
+			</div>
+			<div class="row">
+				<label>Password</label>
+				<input type="text"
+					ng-attr-type="{{ showPassword ? 'text' : 'password' }}"
+					ng-model="item.password" 
+					placeholder="Enter password" />
+			</div>
+			<div class="row inline">
+				<label>Always Remember</label>
+				<input type="checkbox" 
+					placeholder=""
+					ng-model="item.rememberMe"
+					class="chkbox"/>
+			</div>
+			<div class="row">
+				<button type="submit" ng-click="login(item)">Login</button>
+			</div>
+		</div>
+		<!-- End of Form -->
+	</div>
+	<!-- End of Login -->
+</div>
+<!-- End of Container -->

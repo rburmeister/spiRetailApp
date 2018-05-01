@@ -1,0 +1,191 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:350px;
+		width:100%;
+	}
+
+	.search-inventory {
+		float:left;
+		width:100%;
+		position:relative;
+	}
+
+	.search-inventory .btn {
+		display:block;
+		float:left;
+		width:100%;
+		height:60px;
+		line-height:60px;
+		background:#00a8b4;
+		color:#fff;
+		border-radius:10px;
+		padding:0 20px;
+		margin:20px 0 40px 0;
+		border: none;
+	}
+
+	.search-inventory .btn:active{
+		background:#92d402;
+	}
+
+	.search-inventory .btn span {
+		display:block;
+		float:left;
+		line-height:60px;
+		font-size:18px;
+	}
+
+	.search-inventory .btn img {
+	    display: block;
+	    float: right;
+	    max-width: 48px;
+	    margin: 5px 0 0;
+	}
+
+	h1 {
+		display:block;
+		font-size:20px;
+		color:#00a8b4;
+		margin:0 0 10px 0;
+	}
+
+	.form {
+		float:left;
+		width:100%;
+		position:relative;
+		background:#00a8b4;
+		padding:40px 20px;
+		border-radius:10px;
+	}
+
+	.form .row {
+		float:left;
+		width:100%;
+	}
+
+	.form label {
+		display:block;
+		margin:0 0 5px 0;
+		font-size:14px;
+		color:#fff;
+	}
+
+	.form input {
+		display:block;
+		width:100%;
+		height:40px;
+		line-height:20px;
+		padding:0 0 0 10px;
+		margin:0 0 20px 0;
+		background:#fff;
+		border-radius:5px;
+		border:none;
+		font-size:18px;
+	}
+
+	.form input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  text-transform: capitalize !important;
+	}
+
+	.form button {
+		display:block;
+		float:left;
+		width:100%;
+		background:#92d402;
+		border:none;
+		color:#fff;
+		padding:0 20px;
+		height:40px;
+		line-height:40px;
+		font-size:16px;
+		border-radius:10px;
+	}
+
+	.form button:active {
+		background:#7fb902;
+	}
+
+	.error-msg {
+	    position: absolute;
+	    top: 15px;
+	    text-align: left;
+	    width: 100%;
+	    left: 20px;
+	    color: #4d4f53;
+	    font-style: italic;
+	    font-weight: bold;
+	    letter-spacing: 0.25px;
+	    word-spacing: -1px;
+	    text-transform: capitalize;
+	}
+
+	.alert {
+	    width: 100%;
+	    height: 40px;
+	    position: fixed;
+	    background: #4d4f53;
+	    z-index: 11;
+	    top: 0;
+	    padding: 0 20px;
+	    line-height: 40px;
+	    color: #fff;
+	    font-size: 14px;
+	    transform:translateY(-40px);
+	}
+
+	.alert span {
+		display:block;
+		height: 40px;
+	    line-height: 40px;
+	}
+
+	.alert span:first-letter {
+		text-transform:capitalize;
+	}
+	.active.alert {
+		animation: alertDown .45s; 
+		animation-fill-mode: forwards;
+	}
+
+</style>
+
+
+<!-- Container -->
+<div class="container">
+	<!-- Loader -->
+	<page-loader ng-if="pageLoading"></page-loader>
+	<!-- Search Inventory -->
+	<div class="search-inventory" ng-if="!pageLoading">
+		<!-- Scanner -->
+		<button class="btn blue-btn" ng-click="scanBarcode()">
+			<span class="bold">Scan Bar Code</span>
+			<img src="images/barcode-icon-w.png" alt="ICON" />
+		</button>
+		<!-- Search Inventory Form -->
+		<h1>Search Inventory</h1>
+		<div class="form">
+			<span class="error-msg" ng-if="!formValid">{{errorMsg}}</span>
+			<div class="row">
+				<label>Style</label>
+				<input type="text" placeholder="Enter product style" ng-model="item.style"/>
+			</div>
+			<div class="row">
+				<label>Color</label>
+				<input type="text" placeholder="Enter product color" ng-model="item.color" uppercase/>
+			</div>
+			<div class="row">
+				<button type="submit" ng-click="searchInventory(item.style, item.color)">Search</button>
+			</div>
+		</div>
+		<!-- End of Form -->
+	</div>
+	<!-- End of Search Inventory -->
+</div>
+<!-- End of Container -->
+
+<div class="alert" ng-class="{'active' : serverError}">
+	<span>{{errorMsg}}</span>
+</div>
+

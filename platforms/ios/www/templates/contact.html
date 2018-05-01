@@ -1,0 +1,136 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:350px;
+		width:100%;
+	}
+
+	.contact {
+		float:left;
+		width:100%;
+		position:relative;
+		margin:20px 0 0 0;
+	}
+
+	.form {
+		float:left;
+		width:100%;
+		position:relative;
+		background:#00a8b4;
+		padding:20px 15px;
+		border-radius:10px;
+	}
+
+	.form .headline {
+		display:block;
+		color:#fff;
+		margin:0 0 10px 0;
+		font-size:20px;
+	}
+	
+	.form a {
+	    display: block;
+	    float: left;
+	    width: calc(50% - 10px);
+	    margin: 0 10px 0 0;
+	    background: #f4f4f4;
+	    border-radius: 5px;
+	    padding: 0;
+	    height: auto;
+	}
+
+	.form a:last-child {
+		margin:0 0 0 10px;
+	}
+
+	.form a img {
+	    display: block;
+	    margin: 0 auto;
+	    max-width: 70px;
+	    margin-top: 20px;
+	}
+
+	.form a span {
+	    display: block;
+	    float: left;
+	    width: 100%;
+	    text-align: center;
+	    color: #00a8b4;
+	    font-size: 18px;
+	    margin: 10px 0 20px 0;
+	    font-weight: bold;
+	}
+
+	.hours, .address {
+		float:left;
+		width:100%;
+		margin:20px 0 0 0;
+	}
+
+	.hours .headline, .address .headline {
+		display:block;
+		width:100%;
+		margin:0 0 10px 0;
+		font-weight:bold;
+	}
+
+	.hours img {
+		display:block;
+		float:left;
+		width:25px;
+		margin:0 10px 0 0;
+	}
+
+	.hours span, .address span {
+		display:block;
+		float:right;
+		width:100%;
+		margin:0 0 5px 0;
+		font-size:14px;
+		text-align:left;
+	}
+
+	.address span {
+		width:100%;
+		float:left;
+	}
+
+
+</style>
+
+
+<!-- Container -->
+<div class="container">
+	<!-- Contact -->
+	<div class="contact">
+		<!-- Call / Email Contact Form -->
+		<div class="form">
+			<span class="headline">Support</span>
+			<a href="tel:1-800-555-1212" title="">
+				<img src="images/contact-phone.png" />
+				<span>Call</span>
+			</a>
+			<a href="" title="">
+				<img src="images/contact-email.png" />
+				<span>Email</span>
+			</a>
+		</div>
+		<!-- Hours -->
+		<div class="hours">
+			<span class="headline">Hours</span>
+			<!--<img src="" alt="ICON" />-->
+			<span>Monday - Friday</span>
+			<span>6:00AM - 4:00PM (PST)</span>
+		</div>
+		<!-- Address -->
+		<div class="address">
+			<span class="headline">Customer Care</span>
+			<span>9800 De Soto Ave,</span>
+			<span>Chatsworth, CA 91311</span>
+		</div>
+		<!-- End of Form -->
+	</div>
+	<!-- End of Contact -->
+</div>
+<!-- End of Container -->

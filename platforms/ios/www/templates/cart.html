@@ -1,0 +1,444 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:350px;
+		width:100%;
+	}
+
+	.cart-summary {
+		float:left;
+		width:100%;
+		position:relative;
+		margin:20px 0 0 0;
+		padding:0 0 20px 0;
+	}
+
+	.form {
+		float:left;
+		width:100%;
+		position:relative;
+		background:#00a8b4;
+		padding:15px 20px;
+		border-radius:10px;
+		margin:5px 0;
+		transition:all 0.3s ease;
+	}
+
+	.dropship-details.form, .purchase-order.form {
+		background:#fff;
+		padding:0;
+	}
+
+	.purchase-order.form {
+		margin:0;
+	}
+
+	.dropship-details.form label, .purchase-order.form label {
+		color:#ccc;
+		display:none;
+	}
+
+	.dropship-details.form input, .purchase-order.form input, .dropship-details.form select {
+		background:#f3f3f3;
+	}
+
+	.form .row {
+		float:left;
+		width:100%;
+	}
+
+	.form label {
+		display:block;
+		margin:0 0 10px 0;
+		font-size:14px;
+		color:#fff;
+		float:left;
+	}
+
+	.form select {
+		display:block;
+		float:left;
+		width:100%;
+		margin:5px 0;
+		padding:5px 0;
+	}
+
+	.dropship.form span {
+		display:block;
+		float:left;
+		color:#fff;
+		line-height:25px;
+		font-size:18px;
+	}
+
+	.dropship.form label {
+		display:block;
+		float:right;
+		position:relative;
+		margin:0;
+	}
+
+	.dropship.form label > input[type="checkbox"] {
+	    display: none;
+	}
+
+	.dropship.form label span {
+	    display: block;
+	    width: 25px;
+	    height: 25px;
+	    border: 2px solid #fff;
+	    border-radius:5px;
+	}
+
+	.dropship.form input[type="checkbox"]:checked + span:before {
+	    content: "\2714";
+	    color: #fff;
+	    animation: pop 180ms ease-in;
+	    -webkit-animation: pop 180ms ease-in;
+	}
+
+	.dropship.form input[type="checkbox"] + span:before {
+	    display: block;
+	    font-weight: normal;
+	    position: absolute;
+	    right: 3px;
+	    top: 1px;
+	    font-size: 23px;
+	    color: #d1d1d1;
+	    cursor: pointer;
+	}
+
+	.row.shipping {position:relative;}
+
+	.row.shipping:after {
+	  content: '\0276F';
+	  background-size: 20px 20px;
+	  position:absolute;
+	  font-size:26px;
+	  font-weight:bold;
+	  transform:rotate(90deg);
+	  right:10px;
+	  top:33px;
+	  z-index:11;
+	  color:#00a8b4;
+	  width:20px;
+	}
+
+	.form .inline.row label {
+		display:inline-block;
+		margin: 12px 0 0 10px;
+	}
+
+	.form input, .form select {
+		display:block;
+		width:100%;
+		height:40px;
+		line-height:40px;
+		padding:0 0 0 10px;
+		margin:0 0 10px 0;
+		background:#fff;
+		border-radius:5px;
+		border:none;
+	}
+
+	.form select {
+		color: #b3b3b3;
+	}
+
+	.form .ng-touched {
+	    color: #4d4f53 !important;
+	}
+
+	.form .chkbox {
+		display:block;
+		border-radius:50%;
+		width:auto;
+		float:right;
+		margin:0;
+		height:auto;
+		line-height:1;
+		padding:0;
+		width:20px;
+		height:20px;
+	}
+
+	.form button {
+		display:block;
+		float:left;
+		width:100%;
+		background:#92d402;
+		border:none;
+		color:#fff;
+		padding:10px 0;
+		border-radius:10px;
+		font-size:20px;
+	}
+
+	#ds-notice {
+		display:block;
+		float:left;
+		width:100%;
+		font-size:14px;
+		color:#ccc;
+		text-align:center;
+		margin:3px 0;
+	}
+
+	.btn {
+		display:block;
+		float:left;
+		width:100%;
+		height:40px;
+		line-height:40px;
+		text-align:center;
+		margin:10px 0 15px 0;
+		background:#92d402;
+		color:#fff;
+		border:none;
+		border-radius:10px;
+		font-size:20px;
+	}
+
+	.cart-products {
+		float:left;
+		width:100%;
+	}
+
+	.cart-products .cart-item {
+		float:left;
+		width:100%;
+		padding:15px;
+		margin:0 0 10px 0;
+		border:4px solid #efefef;
+		border-radius:10px;
+	}
+
+	.cart-products .cart-item:last-child {
+		margin:0 0 5px 0;
+	}
+
+	.cart-item .row{
+		float:left;
+		width:100%;
+		margin:0 0 10px 0;
+	}
+
+	.cart-item .row:last-child {
+		margin:0;
+	}
+
+	.cart-item .left {
+		float:left;
+	}
+
+	.cart-item .right {
+		float:right;
+	}
+
+	.cart-item button {
+	    display: block;
+	    float: right;
+	    border: none;
+	    width: 20px;
+	    height: 20px;
+	    background: #D34040;
+	    color: #fff;
+	    border-radius: 5px;
+	}
+	.disabled {
+		opacity:0.3;
+		height:0;
+		overflow:hidden;
+	}
+
+	.empty-cart {
+		float:left;
+		width:100%;
+		margin:40px 0;
+	}
+
+	.empty-cart span {
+		display:block;
+		float:left;
+		width:100%;
+		margin:30px 0;
+		text-align:center;
+		font-size:14px;
+	}
+
+	.empty-cart a {
+		display:block;
+		width:200p;
+		height:40px;
+		line-height:40px;
+		text-align:center;
+		margin:0 auto;
+		background:#92d402;
+		color:#fff;
+		border:none;
+		border-radius:10px;
+		clear:both;
+		text-decoration:none;
+	}
+
+	.alert {
+	    width: 100%;
+	    height: 40px;
+	    position: fixed;
+	    background: #D34040;
+	    z-index: 11;
+	    top: 0;
+	    padding: 0 20px;
+	    line-height: 40px;
+	    color: #fff;
+	    font-size: 14px;
+	    transform:translateY(0);
+	}
+
+	.alert a {
+		display:block;
+		float:right;
+		padding:0 15px;
+		background:#ccc;
+		color:#fff;
+		background:#00a8b4;
+		height:26px;
+		line-height:26px;
+		text-decoration: none;
+		margin:7px 0 0 0;
+		border-radius:5px;
+	}
+
+	.alert a:hover, .alert a:active {
+		background:#7fb902;
+	}
+
+	.active.alert {
+		animation: alertDown .45s; 
+		animation-fill-mode: forwards;
+	}
+
+</style>
+
+<div class="alert" ng-class="{'active' : !validForm}">
+	<span>{{errorMsg}}</span>
+</div>
+<!-- Container -->
+<div class="container">
+	<!-- Loader -->
+	<page-loader ng-if="pageLoading"></page-loader>
+	<!-- Empty Cart -->
+	<div class="empty-cart page" ng-if="!cartItems && !pageLoading">
+		<span>No items have been added to your cart</span>
+		<a href="#search-inventory">Add Products</a>
+	</div>
+	<!-- Cart -->
+	<div class="cart-summary page" ng-if="!pageLoading">
+		<!-- Dropship Option -->
+		<div class="dropship form">
+			<div class="row">
+				<span>Dropship</span>
+				<!--<input type="checkbox" 
+				ng-model="item.dropship"
+				ng-change="toggleDropship(item.dropship)"
+				class="chkbox" />-->
+				<label>
+                    <input type="checkbox" 
+                    	   class="chkbox" 
+                    	   ng-model="item.dropship"
+                    	   ng-change="toggleDropship(item.dropship)"/>
+                    <span></span>
+                </label>
+			</div>
+		</div>
+		<span id="ds-notice">*Dropship requires name and address input</span>
+		<!-- Dropship Details -->
+		<div class="dropship-details form" ng-class="{disabled: hideDropship}">
+			<div class="row">
+				<label>Name</label>
+				<input type="text" 
+				ng-model="item.name"
+				ng-disabled="noDropship"
+				placeholder="Name" />
+			</div>
+			<div class="row">
+				<label>Address</label>
+				<input type="text" 
+				ng-model="item.address1"
+				ng-disabled="noDropship"
+				placeholder="Address" />
+			</div>
+			<div class="row">
+				<label>Address 2 (optional)</label>
+				<input type="text" 
+				ng-model="item.address2"
+				ng-disabled="noDropship"
+				placeholder="Address 2 (optional)" />
+			</div>
+			<div class="row">
+				<label>City</label>
+				<input type="text" 
+				ng-model="item.city"
+				ng-disabled="noDropship"
+				placeholder="City" />
+			</div>
+			<div class="row">
+				<label>State</label>
+				 <select name="storeSelect" 
+				 ng-disabled="noDropship"
+				 ng-model="item.state">
+      				<option ng-repeat="state in states" value="{{state.abbreviation}}">{{state.name}}</option>
+      				<option style="display:none" value="">Select State</option>
+   				 </select>
+			</div>
+			<div class="row">
+				<label>Zip</label>
+				<input type="text" 
+				ng-model="item.zip"
+				ng-disabled="noDropship"
+				placeholder="Zip Code" />
+			</div>			
+		</div>
+		<!-- Purchase Order Number -->
+		<div class="purchase-order form">
+			<div class="row">
+				<label>Purchase Order #</label>
+				<input type="text" 
+				ng-model="item.purchaseOrder"
+				placeholder="Purchase Order # (optional)" />
+			</div>	
+		</div>
+		<!-- Shipping Method -->
+		<div class="form">
+			<div class="row shipping">
+				<label>Shipping Method</label>
+   				 <select name="shippingMethod" 
+				 		ng-model="item.shipVia">
+      				<option ng-repeat="ship in shippingOptions" value="{{ship.code}}">{{ship.description}}</option>
+      				<option style="display:none" value="">Select Shipping Method</option>
+   				 </select>
+			</div>	
+		</div>
+		<!-- Submit Order -->
+		<button type="submit" ng-click="submitOrder(item)" class="btn grn">Submit Order</button>
+
+		<!-- Cart Summary -->
+		<div class="cart-products">
+			<div class="cart-item stagger stagger-fade-up" ng-repeat="item in cartItems">
+				<div class="row">
+					<div class="left">{{item.style}} {{item.color}} {{item.size}}</div>
+					<div class="right"><button type="submit" ng-click="removeCartItem(item)">X</button></div>
+				</div>
+				<div class="row">
+					<div class="left">Qty:{{item.qty}}</div>
+					<div class="right">{{item.price | currency}}</div>
+				</div>
+			</div>
+		</div>
+		<!-- Submit Order -->
+		<button type="submit" ng-click="submitOrder(item)" class="btn grn">Submit Order</button>
+	</div>
+	<!-- End of Cart -->
+</div>
+<!-- End of Container -->

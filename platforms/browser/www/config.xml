@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.phonegap.spiretailapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>SPI Retail</name>
+    <description>
+        SPI Retail
+    </description>
+    <author email=" contact@strategicpartners.net" href="http://strategicpartners.net">
+        SPI Retail
+    </author>
+    <content src="http://localhost:8080" />
+    <allow-navigation href="gap://ready" />
+    <allow-navigation href="http://localhost:*" />
+    <access origin="*" />
+    <access origin="https://www.spiconnect.net/APPRESTWcfService/RestService.svc/*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="geo:*" />
+    <access launch-external="yes" origin="tel:*" />
+    <gap:config-file overwrite="true" parent="UIViewControllerBasedStatusBarAppearance" platform="ios">
+        <false />
+    </gap:config-file>
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="14" />
+    <preference name="StatusBarBackgroundColor" value="#4d4f53" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarDefaultScrollToTop" value="false" />
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+</widget>

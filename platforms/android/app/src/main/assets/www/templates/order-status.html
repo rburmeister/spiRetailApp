@@ -1,0 +1,362 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:350px;
+		width:100%;
+	}
+
+	.order-status {
+		float:left;
+		width:100%;
+		position:relative;
+		margin: 20px 0 0 0;
+	}
+
+	.order-status h1 {
+		display:block;
+		margin:0 0 15px 0;
+	}
+
+	h1 {
+	    display: block;
+	    font-size: 24px;
+	    color: #00a8b4;
+	    margin: 0 0 10px 0;
+	}
+
+	.form {
+		float:left;
+		width:100%;
+		position:relative;
+		background:#00a8b4;
+		padding:15px;
+		border-radius:10px;
+	}
+
+	.form .row {
+		float:left;
+		width:100%;
+	}
+
+	.order-status .form input {
+		display:block;
+		float:left;
+		width:calc(100% - 50px);
+		height:40px;
+		line-height:20px;
+		padding:0 0 0 10px;
+		margin:0 10px 0 0;
+		background:#fff;
+		border-radius:5px;
+		border:none;
+		font-size:18px;
+	}
+
+	.order-status .form .row button {
+		display:block;
+		float:left;
+		width:40px;
+		height:40px;
+		border-radius:5px;
+		background:#92d402;
+		color:#fff;
+		border:none;
+	}
+
+	.order-status .form .row button:hover, .order-status .form .row button:active {
+		background:#7fb902;
+	}
+
+	.order-status .form .row button img {
+		display:block;
+		max-width:20px;
+		margin:0 auto;
+	}
+
+	.order-details {
+		float:left;
+		width:100%;
+		margin:20px 0 0 0;
+	}
+
+	.order-details .order {
+		float:left;
+		width:100%;
+		padding:15px;
+		margin:0 0 10px 0;
+		border:4px solid #efefef;
+		border-radius:10px;
+	}
+
+	.order-details .order .row {
+		display:block;
+		float:left;
+		width:100%;
+	}
+
+	.order-details .order .row:first-child {
+		margin:0 0 10px 0;
+		padding:0 0 10px 0;
+		border-bottom:1px solid #efefef;
+	}
+
+	.order-details .order .row span {
+		display:block;
+		float:left;
+		width:100%;
+	}
+
+	.order-details .order .row .left {
+		display:block;
+		float:left;
+		width:calc(100% - 65px);
+	}
+
+	.order-details .order .row .left .full {
+		display:block;
+		width:100%;
+		float:left;
+		margin:0 0 5px 0;
+		overflow:hidden;
+	}
+
+
+	.order-details .order .row .divide:first-child {
+		padding:0 0 10px 0;
+		margin:0 0 10px 0;
+		border-bottom:1px solid #efefef;
+	}
+
+	.order-details .order .row .left .full:last-child {
+		margin:0;
+	}
+
+	.order-details .order .row .right {
+		display:block;
+		float:right;
+		width:65px;
+	}
+
+	.order-details .order .row .full {
+		display:block;
+		width:100%;
+		float:left;
+		margin:0 0 9px 0;
+	}
+
+	.order-details .order .row .half {
+		display:block;
+		width:50%;
+		float:left;
+	}
+
+	.order-details .order .row .third {
+		display:block;
+		width:calc(100%/3);
+		float:left;
+	}
+
+	.order-details .order .row .full span:first-child {
+		color:#9a9b9c;
+		font-size:13px;
+	}
+
+	.order-details .order .row .full span:last-child {
+		font-size:16px;
+	}
+
+	.order-details .order .row .full:last-child {
+		margin:0;
+	}
+
+	.order-details .order span {
+	    font-size: 14px;
+	    margin:0 0 3px 0;
+	}
+
+	.order-details .order .row span:last-child {
+		margin:0;
+	}
+
+	.no-orders {
+		float:left;
+		width:100%;
+		margin:30px 0;
+	}
+
+	.no-orders span {
+		display:block;
+		float:left;
+		width:100%;
+		text-align:center;
+		font-style:italic;
+		font-size:18px;
+		color:#9a9b9c;
+	}
+
+	.alert {
+	    width: 100%;
+	    height: 40px;
+	    position: fixed;
+	    background: #D34040;
+	    z-index: 11;
+	    top: 0;
+	    padding: 0 20px;
+	    line-height: 40px;
+	    color: #fff;
+	    font-size: 14px;
+	    transform:translateY(-40px);
+	}
+
+	.alert span {
+		display:block;
+		height: 40px;
+	    line-height: 40px;
+	}
+
+	.alert span:first-letter {
+		text-transform:capitalize;
+	}
+	.active.alert {
+		animation: alertDown .45s; 
+		animation-fill-mode: forwards;
+	}
+
+	.sub-headline {
+		color:#00a8b4 !important;
+		margin:0 0 5px 0 !important;
+	}
+
+	.green {
+		color:#92d402;
+	}
+
+	.status-open {
+		color:#3aacb3;
+	}
+
+	.status-canceled {
+		color:#D34040 ;
+	}
+
+	.status-shipped {
+		color:#94c93d ;
+	}
+
+	.status-packing {
+		color:#94c93d ;
+	}
+
+</style>
+
+<div class="alert" ng-class="{'active' : serverError}">
+	<span>{{errorMsg}}</span>
+</div>
+<!-- Container -->
+<div class="container order-status-contain">
+	<!-- Loader -->
+	<page-loader ng-if="pageLoading"></page-loader>
+	<!-- Order Status -->
+	<div class="order-status" >
+		<h1>Order Status</h1>
+		<!-- Order Status Form -->
+		<div class="form">
+			<div class="row">
+				<label></label>
+				<input type="text" placeholder="Search by PO#, SO#, Date" ng-model="item"/>
+				<button type="submit" ng-click="searchOrders(item)">
+					<img src="images/menu-search-inventory.png" />
+				</button>
+			</div>
+			<!-- Search Loader -->
+			<page-loader ng-if="searchLoading"></page-loader>
+		</div>
+		<!-- No Orders -->
+		<div class="no-orders" ng-if="orders.length <= 0">
+			<span>There are no orders.</span>
+		</div>
+
+		<!-- Order Details -->
+		<div class="order-details" ng-if="!searchLoading && !pageLoading">
+			<!-- <div class="order stagger stagger-fade-up" ng-repeat="order in orders">
+				<div class="row">
+					<span class="left">PO#: {{order.po}}</span>
+					<span class="right"
+							ng-class="{'status-packing' : order.status == 'In Packing', 
+							'status-open' : order.status == 'Open', 
+							'status-canceled' : order.status == 'Cancelled', 
+							'status-shipped' : order.status == 'Shipped'}">
+						Status: {{order.status}}
+					</span>
+				</div>
+				<div class="row">
+					<span class="left">SO#: {{order.so}}</span>
+					<span class="right">Qty Ordered: {{order.unitsTotal}}</span>
+				</div>
+				<div class="row">
+					<span class="left">Order Date: {{order.so}}</span>
+					<span class="right">Qty Shipped: {{order.unitsShipped}}</span>
+				</div>
+				<div class="row">
+					<span class="left green">Shipped Date: 04/19/2018</span>
+					<span class="right">Qty Open: {{order.unitsTotal - order.unitsShipped}}</span>
+				</div> -->
+				<div class="order stagger stagger-fade-up" ng-repeat="order in orders">
+					<div class="row">
+						<div class="left">
+							<div class="full">
+								<span>PO#:</span>
+								<span>{{order.po}}</span>
+							</div>
+							<div class="full">
+								<span>SO#:</span>
+								<span>{{order.so}}</span>
+							</div>
+						</div>
+						<div class="right">
+							<span>Status:</span>
+							<span 
+								ng-class="{'status-packing' : order.status == 'In Packing', 
+								'status-open' : order.status == 'Open', 
+								'status-canceled' : order.status == 'Cancelled', 
+								'status-shipped' : order.status == 'Shipped'}">
+								{{order.status}}
+							</span>
+						</div>
+					</div>	
+					<div class="row">
+						<div class="full divide">
+							<span class="full sub-headline">Dates</span>
+							<div class="half">
+								<span>Ordered:</span>
+								<span>{{order.date}}</span>
+							</div>
+							<div class="half">
+								<span>Shipped:</span> 
+								<span>{{order.minShipDate}}</span>
+							</div>
+						</div>
+						<div class="full divide">
+							<span class="full sub-headline">Items</span>
+							<div class="third">
+								<span>Ordered:</span>
+								<span>{{order.unitsTotal}}</span>
+							</div>
+							<div class="third">
+								<span>Shipped:</span> 
+								<span>{{order.unitsShipped}}</span>
+							</div>
+							<div class="third">
+								<span>Open:</span> 
+								<span>{{order.unitsTotal - order.unitsShipped}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of Search Inventory -->
+</div>
+<!-- End of Container -->

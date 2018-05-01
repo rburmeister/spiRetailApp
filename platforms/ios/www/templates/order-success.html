@@ -1,0 +1,162 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:350px;
+		width:100%;
+	}
+
+	.order-success {
+		float:left;
+		width:100%;
+		position:relative;
+		margin:20px 0 0 0;
+	}
+
+
+	.form {
+		float:left;
+		width:100%;
+		position:relative;
+		background:#00a8b4;
+		padding:20px;
+		border-radius:10px;
+	}
+
+	.form .row {
+		float:left;
+		width:100%;
+	}
+
+	.form .row.center span {
+		display:block;
+		float:left;
+		width:100%;
+		text-align: center;
+		text-transform: capitalize;
+	}
+
+	.form svg {
+		display:block;
+		margin:20px auto;
+		max-width:70%;
+	}
+
+	.form span {
+		display:block;
+		margin:0 0 5px 0;
+		font-size:14px;
+		color:#fff;
+		width:100%;
+	}
+
+	.form .headline {
+		font-weight:bold;
+		font-size:20px;
+		margin:10px 0 0 0;
+	}
+
+	.form .subheadline {
+		font-weight:bold;
+		font-size:16px;
+		margin: 10px 0 5px 0;
+	}
+
+	 .go-btn {
+		display:block;
+		float:left;
+		width:100%;
+		background:#92d402;
+		border:none;
+		color:#fff;
+		padding:10px 0;
+		border-radius:10px;
+		margin:20px 0 0 0;
+	}
+
+	.form .path {
+	  stroke-dasharray: 1000;
+	  stroke-dashoffset: 0;
+	}
+
+	.form .path.circle {
+	  -webkit-animation: dash 0.9s ease-in-out;
+	  animation: dash 0.9s ease-in-out;
+	}
+
+	.form .path.line {
+	  stroke-dashoffset: 1000;
+	  -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
+	  animation: dash 0.9s 0.35s ease-in-out forwards;
+	}
+
+	.form .path.check {
+	  stroke-dashoffset: -100;
+	  -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
+	  animation: dash-check 0.9s 0.35s ease-in-out forwards;
+	}
+
+	@-webkit-keyframes dash {
+	  0% {
+	    stroke-dashoffset: 1000;
+	  }
+	  100% {
+	    stroke-dashoffset: 0;
+	  }
+	}
+	@keyframes dash {
+	  0% {
+	    stroke-dashoffset: 1000;
+	  }
+	  100% {
+	    stroke-dashoffset: 0;
+	  }
+	}
+	@-webkit-keyframes dash-check {
+	  0% {
+	    stroke-dashoffset: -100;
+	  }
+	  100% {
+	    stroke-dashoffset: 900;
+	  }
+	}
+	@keyframes dash-check {
+	  0% {
+	    stroke-dashoffset: -100;
+	  }
+	  100% {
+	    stroke-dashoffset: 900;
+	  }
+	}
+
+</style>
+
+<!-- Container -->
+<div class="container">
+	<!-- Order Success -->
+	<div class="order-success">
+		<!-- Success Message -->
+		<div class="form">
+			<success-icon></success-icon>
+			<div class="row center" ng-if="dropship">
+				<span>{{contactName}}</span>
+				<span>Shipping Address: {{shippingMethod}}</span>
+				<span>{{address1}}</span>
+				<span ng-if="address2">{{address2}}</span>
+				<span>{{city}}, {{state}}, {{zip}}</span>
+			</div>
+			<div class="row inline">
+				<span class="headline">Order Placed</span>
+				<span class="subheadline">{{salesOrderNumber}}</span>
+				<span>Shipped: {{shipVia}}</span>
+				<span>Items: {{orderQty}}</span>
+				<span class="subheadline">Total: {{orderTotal | currency}}</span>
+			</div>
+		</div>
+		<!-- End of Success Message -->
+		<button type="submit" ng-click="goHome()" class="go-btn">Ok</button>
+
+	</div>
+	<!-- End of Order Success -->
+</div>
+<!-- End of Container -->

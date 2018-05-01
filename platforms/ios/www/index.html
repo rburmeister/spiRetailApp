@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="viewport-fit=cover, initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos; *; style-src &apos;self&apos; &apos;unsafe-inline&apos; *" >
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' 'unsafe-eval' https://ssl.gstatic.com https://www.google-analytics.com;">-->
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <link rel="stylesheet" href="style.css">
+    <title>SPI Retail App</title>
+</head>
+
+<body ng-app="retailApp">
+        <div id="top" ng-controller="topController">
+            <navigation ng-class="{'active' : toggle}"></navigation>
+            <div class="top-bar" id="top-bar" style="display:none;" ng-class="{'active' : session}">
+                <div class="menu" ng-if="!disable">
+                    <span class="mobile" ng-click="openMenu();" ng-class="{'active' : toggle}">
+                        <span class=""></span>
+                        <span class=""></span>
+                        <span class=""></span>
+                    </span>
+                </div>
+                <div class="logo">
+                    <brand-logo ng-click="goHome();"></brand-logo>
+                </div>
+                <div class="cart" ng-controller="cartController" ng-if="!disable">
+                    <button ng-click="viewCart()">
+                        <img src="images/cart-icon.png" alt="ICON" />
+                        <span class="cart-count">{{cartQty}}</span>
+                        <span class="cart-change" ng-class="{'active' : cartChange}"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="alert" ng-class="{'active' : serverError}">
+                <span>{{errorMsg}}</span>
+            </div>
+        </div>
+
+
+        <div class="site-contain">
+            <!-- Loader 
+            <div class="loader" ng-show="coinLoading"></div>-->
+            <div class="page {{ pageClass }}" ng-view></div>
+        </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <script src="angular.js"></script>
+    <script src="angular-route.js"></script>
+    <script src="lodash.core.js"></script>
+    <script src="angular-lodash.js"></script>
+    <script src="angular-animate.js"></script>
+    <script src="fastclick.js"></script>
+    <script src="app/app.js"></script>
+</body>
+
+</html>

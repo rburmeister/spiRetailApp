@@ -1,0 +1,16 @@
+{
+    "libz.dylib": 1,
+    "CFNetwork.framework": 1,
+    "SystemConfiguration.framework": 2,
+    "WebKit.framework": 2,
+    "ImageIO.framework": 1,
+    "CoreLocation.framework": 2,
+    "AVFoundation.framework": 2,
+    "libz.tbd": 1,
+    "AudioToolbox.framework": 3,
+    "CoreTelephony.framework": 1,
+    "libiconv.dylib": 1,
+    "CoreVideo.framework": 1,
+    "QuartzCore.framework": 1,
+    "CoreImage.framework": 1
+}

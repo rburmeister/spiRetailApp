@@ -1,0 +1,371 @@
+<style>
+	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
+
+	.container {
+		max-width:350px;
+		width:100%;
+	}
+
+	.invoices-payment {
+		float:left;
+		width:100%;
+		position:relative;
+		padding:0 0 80px 0;
+	}
+
+	.invoices-payment h1 {
+		display:block;
+		margin:20px 0 10px 0;
+		float:left;
+	}
+
+	h1 {
+	    display: block;
+	    font-size: 20px;
+	    color: #00a8b4;
+	    margin: 0 0 10px 0;
+	}
+
+	.form {
+		float:left;
+		width:100%;
+		position:relative;
+		background:#fff;
+		padding:0;
+		border-radius:10px;
+		margin:5px 0;
+		transition:all 0.3s ease;
+	}
+
+	.form .row {
+		float:left;
+		width:100%;
+	}
+
+	.form .row-50 {
+		float:left;
+		width:50%;
+	}
+
+	.form .row-m {
+		margin:0 10px 0 0;
+		width:calc(50% - 10px);
+	}
+
+	.form label {
+		display:block;
+		margin:0 0 5px 0;
+		font-size:14px;
+		color:#fff;
+		float:left;
+		display:none;
+	}
+
+	.form select {
+		display:block;
+		float:left;
+		width:100%;
+		margin:5px 0;
+		padding:5px 0;
+		color:#b3b3b3;
+	}
+
+	.form select option:checked {
+		color:#b3b3b3;
+	}
+
+	.form .inline.row {
+		margin:10px 0 0 10px;
+	}
+
+	.form .inline.row label {
+		display:inline-block !important;
+		color:#9A9B99;
+		margin:0 0 0 5px;
+	}
+
+	.form .inline.row .chkbox {
+		float:left;
+	}
+
+	.form input, .form select {
+		display:block;
+		width:100%;
+		height:40px;
+		line-height:20px;
+		padding:0 0 0 10px;
+		margin:0 0 10px 0;
+		background:#efefef;
+		border-radius:5px;
+		border:none;
+		font-size:16px;
+	}
+
+	.form .ng-touched {
+		color:#4d4f53 !important;
+	}
+
+	.form .chkbox {
+		display:block;
+		border-radius:50%;
+		width:auto;
+		float:right;
+		margin:0;
+		height:auto;
+		line-height:1;
+		padding:0;
+		width:20px;
+		height:20px;
+	}
+
+	.form button {
+		display:block;
+		float:left;
+		width:100%;
+		background:#92d402;
+		border:none;
+		color:#fff;
+		padding:10px 0;
+		border-radius:10px;
+	}
+
+	.form .row p {
+		display:block;
+		float:left;
+		padding:0 10px;
+		color:#9A9B99;
+		line-height:1.2;
+		font-size:12px;
+	}
+
+
+
+	.invoice-bar {
+		position:fixed;
+		left:0;
+		bottom:0;
+		width:100%;
+		background:#00a8b4;
+		height:60px;
+		line-height:60px;
+		padding:0 20px;
+		box-shadow: 0px -4px 10px -2px rgba(0,0,0,0.05);
+	}
+
+	.invoice-bar label {
+		display:block;
+		position:relative;
+		float:left;
+		color:#fff;
+		line-height:60px;
+	}
+
+	.invoice-bar label:after {
+	    content: '$';
+	    position: absolute;
+	    right: -28px;
+	    top: 0;
+	    font-size: 16px;
+	    color: #000;
+	    z-index: 10;
+	    line-height: 60px;
+	}
+
+	.invoice-bar input {
+	    display: block;
+	    float: left;
+	    height: 40px;
+	    line-height: 40px;
+	    width: 120px;
+	    margin: 10px 0 0 10px;
+	    padding: 0 0 0 20px;
+	    border-radius:10px;
+	    border:none;
+	    font-size:16px;
+	}
+
+	.invoice-bar button {
+		display:block;
+		float:right;
+		height:40px;
+		line-height:40px;
+		padding:0 20px;
+		border-radius:10px;
+		background:#92d402;
+		color:#fff;
+		border:none;
+		margin:10px 0 0 0;
+	    font-size:16px;
+	}
+
+	.btn-txt {
+	    font-size: 15px;
+	    color: #9a9b9c;
+	    padding: 5px 0;
+	    background: none;
+	    border: none;
+	    text-align: left;
+	    display: block;
+	}
+
+	.alert {
+	    width: 100%;
+	    height: 40px;
+	    position: fixed;
+	    background: #D34040;
+	    z-index: 11;
+	    top: 0;
+	    padding: 0 20px;
+	    line-height: 40px;
+	    color: #fff;
+	    font-size: 14px;
+	    transform:translateY(0);
+	}
+
+	.active.alert {
+		animation: alertDown .45s; 
+		animation-fill-mode: forwards;
+	}
+
+	.overlay {
+		position:fixed;
+		width:100%;
+		height:100vh;
+		background:rgba(255,255,255,0.8);
+		z-index:10;
+	}
+
+</style>
+
+<div class="alert" ng-class="{'active' : !validForm}">
+	<span>{{errorMsg}}</span>
+</div>
+
+<!-- Site Overlay -->
+<div class="overlay" ng-if="formLoading">
+	<page-loader></page-loader>
+</div>
+<!-- Container -->
+<div class="container">
+
+	<!-- Invoices Payment -->
+	<div class="invoices-payment">
+
+		<!-- Go Back Shortcut -->
+		<button class="btn-txt" ng-click="goBack()">&#x276E; Go Back</button>
+		<!-- Headline -->
+		<h1>Billing Address</h1>
+		<!-- Payment Form -->
+		<div class="invoice-payment form">
+			<div class="row">
+				<label>Address</label>
+				<input type="text" 
+				ng-model="item.address1"
+				placeholder="Address" />
+			</div>
+			<div class="row">
+				<label>Address 2</label>
+				<input type="text" 
+				ng-model="item.address2"
+				placeholder="Address 2 (optional)" />
+			</div>
+			<div class="row">
+				<label>City</label>
+				<input type="text" 
+				ng-model="item.city"
+				placeholder="City" />
+			</div>
+			<div class="row row-50 row-m">
+				<label>State</label>
+				 <select name="storeSelect" 
+				 ng-model="item.state">
+      				<option ng-repeat="state in states" value="{{state.abbreviation}}">{{state.name}}</option>
+      				<option style="display:none" value="">Select State</option>
+   				 </select>
+			</div>
+			<div class="row row-50">
+				<label>Zip</label>
+				<input type="text" 
+				ng-model="item.zip"
+				placeholder="Zip Code" />
+			</div>			
+		</div>
+
+		<!-- Pay By Check -->
+		<h1>Pay By Check</h1>
+		<!-- Payment Form -->
+		<div class="invoice-payment form">
+			<div class="row">
+				<label>Business Name</label>
+				<input type="text" 
+				ng-model="item.businessName"
+				placeholder="Business Name" />
+			</div>
+			<div class="row">
+				<label>Routing Number</label>
+				<input type="number" 
+				ng-model="item.routingNumber"
+				placeholder="Routing Number" />
+			</div>
+			<div class="row">
+				<label>Account Number</label>
+				<input type="number" 
+				ng-model="item.accountNumber"
+				placeholder="Account Number" />
+			</div>	
+			<div class="row">
+				<p>By Clicking the "I Agree" box below, you authorize Strategic Partners to use information from your check to initiate a one-time fund transfer from your account or to process the payment as a check transaction or bank drawn draft from your account for the amount of $83.00. If your payment is returned due to insufficient funds, you authorize us to make a one-time electronic funds transfer or to use a bank draft drawn from your account to collect a fee as allowed by state law. I have also read and agree with the return policy.</p>
+			</div>
+			<div class="row inline">
+				<input type="checkbox" 
+					placeholder=""
+					ng-model="item.checkAgree"
+					class="chkbox"/>
+				<label>I agree</label>
+			</div>
+		</div>
+
+		<!-- Credit Card Form -->
+		<h1>Or Pay By Credit Card</h1>
+		<!-- Payment Form -->
+		<div class="invoice-payment form">
+			<div class="row">
+				<label>Card Holder Name</label>
+				<input type="text" 
+				ng-model="item.cardName"
+				placeholder="Card Holder Name" />
+			</div>
+			<div class="row">
+				<label>Card Number</label>
+				<input type="number" 
+				ng-model="item.cardNumber"
+				placeholder="Card Number" />
+			</div>
+			<div class="row row-50 row-m">
+				<label>Exp. Date</label>
+				<input type="number" 
+				ng-model="item.expDate"
+				placeholder="Exp Date (MMYY)" />
+			</div>
+			<div class="row row-50">
+				<label>CSV</label>
+				<input type="number" 
+				ng-model="item.csv"
+				placeholder="CVV" />
+			</div>			
+		</div>
+
+		<!-- Invoice Bar -->
+		<div class="invoice-bar">
+			<label>Amount</label>
+				<input type="text"
+				ng-model="invoiceAmount"
+				decimals="2"
+				placeholder="0.00" />
+			<button type="submit" ng-click="submitPayment(item, selectedState)">Pay Now</button>
+		</div>
+
+	</div>
+	<!-- End of Invoices Payment -->
+</div>
+<!-- End of Container -->
