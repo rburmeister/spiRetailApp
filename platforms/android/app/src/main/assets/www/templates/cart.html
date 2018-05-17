@@ -2,7 +2,7 @@
 	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
 
 	.container {
-		max-width:350px;
+		max-width:400px;
 		width:100%;
 	}
 
@@ -46,6 +46,7 @@
 	.form .row {
 		float:left;
 		width:100%;
+		position:relative;
 	}
 
 	.form label {
@@ -92,10 +93,16 @@
 	}
 
 	.dropship.form input[type="checkbox"]:checked + span:before {
-	    content: "\2714";
-	    color: #fff;
-	    animation: pop 180ms ease-in;
-	    -webkit-animation: pop 180ms ease-in;
+		content: '';
+		position: absolute;
+		left: 5px;
+		top: 12px;
+		background: #fff;
+		width: 2px;
+		height: 2px;
+		box-shadow: 2px 0 0 #fff, 4px 0 0 #fff, 4px -2px 0 #fff, 4px -4px 0 #fff, 4px -6px 0 #fff, 4px -8px 0 #fff;
+		-webkit-transform: rotate(45deg) scale(1.5);
+		transform: rotate(45deg) scale(1.5);
 	}
 
 	.dropship.form input[type="checkbox"] + span:before {
@@ -157,13 +164,64 @@
 	    color: #4d4f53 !important;
 	}
 
-	.form .row.terms span {
+	.form .row.terms {
+	    margin: 10px 0 0 0;
+	}
+	
+	.form .terms span {
 	    display: block;
 	    height: 40px;
 	    line-height: 40px;
 	    color: #fff;
 	    text-decoration: underline;
 	}
+
+	.form .terms label {
+		margin:0;
+	}
+
+	.form .terms label > input[type="checkbox"] {
+	    opacity:0;
+	}
+
+	.form .terms label span {
+	    display: block;
+	    width: 25px;
+	    height: 25px;
+	    border: 2px solid #fff;
+	    border-radius:5px;
+	}
+
+	.form .terms input[type="checkbox"]:checked + span:before {
+	     content: '';
+		  position: absolute;
+		  left: 5px;
+		  top: 12px;
+		  background: #fff;
+		  width: 2px;
+		  height: 2px;
+		  box-shadow: 2px 0 0 #fff, 4px 0 0 #fff, 4px -2px 0 #fff, 4px -4px 0 #fff, 4px -6px 0 #fff, 4px -8px 0 #fff;
+		  -webkit-transform: rotate(45deg) scale(1.5);
+          transform: rotate(45deg) scale(1.5);
+	}
+
+	.form .terms input[type="checkbox"] + span:before {
+	    display: block;
+	    font-weight: normal;
+	    position: absolute;
+	    right: 3px;
+	    top: 1px;
+	    font-size: 23px;
+	    color: #d1d1d1;
+	    cursor: pointer;
+	}
+
+	.form .terms p {
+	    padding: 5px 0 10px 0;
+	    color: #fff;
+	    text-decoration: underline;
+	}
+
 
 	.form .chkbox {
 		display:block;
@@ -300,7 +358,7 @@
 
 	.alert {
 	    width: 100%;
-	    height: 40px;
+	    height: auto;
 	    position: fixed;
 	    background: #D34040;
 	    z-index: 11;
@@ -324,6 +382,8 @@
 		text-decoration: none;
 		margin:7px 0 0 0;
 		border-radius:5px;
+		padding:10px 15px;
+		line-height:1.2;
 	}
 
 	.alert a:hover, .alert a:active {
@@ -343,7 +403,7 @@
 		background:#00a8b4;
 		height:60px;
 		box-shadow: 0px -4px 10px -2px rgba(0,0,0,0.05);
-		z-index:9999;
+		z-index:11;
 	}
 
 	.invoice-bar label {
@@ -570,7 +630,11 @@
 			</div>	
 			<!-- Terms of Service -->
 			<div class="row terms">
-				<input type="checkbox" ng-model="item.termsAgree" ng-checked="true"><span ng-click="showTerms()">I agree to Terms and Services</span>
+				<label>
+					<input type="checkbox" ng-model="item.termsAgree" ng-checked="true">
+					<span></span>
+				</label>
+				<p ng-click="showTerms()">I agree to Terms and Services</p>
 			</div>	
 		</div>
 		<!-- Submit Order -->

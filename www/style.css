@@ -9,10 +9,10 @@ select:focus {outline:none;}
 button, select {-webkit-appearance: none;}
 
 .container {
-  max-width:350px;
+  max-width:400px;
   width:100%;
   margin:0 auto;
-  padding:70px 20px 0 20px;
+  padding:80px 20px 0 20px;
   height:100vh;
 }
 
@@ -68,6 +68,13 @@ button, select {-webkit-appearance: none;}
     fill:#FFFFFF;
 }
 
+.top-bar .menu {
+  padding:0;
+  float:left;
+  width:60px;
+  height:60px;
+  margin:0 0 0 -10px;
+}
 
 .mobile, .close {
     position: absolute;
@@ -597,7 +604,7 @@ navigation ul li span {
 }
 
 @keyframes alertDownLogin {
-  from  { transform:translateY(-40px);}
+  from  { transform:translateY(-200px);}
   to    { transform:translateY(0);}
 }
 

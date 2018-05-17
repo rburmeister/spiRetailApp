@@ -1,4 +1,4 @@
-#Fri Apr 27 16:21:00 PDT 2018
-base.0=C\:\\Users\\rburmeis\\spiRetailApp\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Mon May 07 13:34:13 PDT 2018
+base.0=C\:\\Users\\rburmeis\\spiRetailApp\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\30
 path.0=classes.dex
 renamed.0=classes.dex

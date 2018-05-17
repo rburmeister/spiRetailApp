@@ -108,12 +108,12 @@
         "source": "C:\\Users\\rburmeis\\spiRetailApp\\platforms\\android\\app\\src\\main\\res\\xml\\provider_paths.xml"
     },
     {
-        "merged": "C:\\Users\\rburmeis\\spiRetailApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-hdpi_screen.png.flat",
-        "source": "C:\\Users\\rburmeis\\spiRetailApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-hdpi\\screen.png"
-    },
-    {
         "merged": "C:\\Users\\rburmeis\\spiRetailApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_encode.xml.flat",
         "source": "C:\\Users\\rburmeis\\.gradle\\caches\\transforms-1\\files-1.1\\barcodescanner-release-2.1.5.aar\\c181382b3a3afd1a9d0fe6b6b8e1b48f\\res\\layout\\encode.xml"
+    },
+    {
+        "merged": "C:\\Users\\rburmeis\\spiRetailApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-hdpi_screen.png.flat",
+        "source": "C:\\Users\\rburmeis\\spiRetailApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-hdpi\\screen.png"
     },
     {
         "merged": "C:\\Users\\rburmeis\\spiRetailApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_icon.png.flat",

@@ -49,8 +49,8 @@
         <div id="top" ng-controller="topController">
             <navigation ng-class="{'active' : toggle}"></navigation>
             <div class="top-bar" id="top-bar" style="display:none;" ng-class="{'active' : session}">
-                <div class="menu" ng-if="!disable">
-                    <span class="mobile" ng-click="openMenu();" ng-class="{'active' : toggle}">
+                <div class="menu" ng-if="!disable" ng-click="openMenu();">
+                    <span class="mobile" ng-class="{'active' : toggle}">
                         <span class=""></span>
                         <span class=""></span>
                         <span class=""></span>

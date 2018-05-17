@@ -2,7 +2,7 @@
 	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
 
 	.container {
-		max-width:350px;
+		max-width:400px;
 		width:100%;
 	}
 
@@ -42,7 +42,7 @@
 		padding:15px;
 		margin:0 0 10px 0;
 		border-radius:10px;
-		background:#e0e0e0;
+		background:#9a9b9c;
 	}
 
 	.pay-invoices .invoice .row {
@@ -52,7 +52,7 @@
 	}
 
 	.pay-invoices .invoice .row:first-child {
-		margin:0 0 10px 0;
+		margin:0 0 0 0;
 	}
 
 	.pay-invoices .invoice .row .left {
@@ -77,7 +77,7 @@
 
 	.pay-invoices .invoice span {
 		margin:0 0 5px 0;
-		font-size:18px;
+		font-size:15px;
 	}
 
 	.pay-invoices .invoice .row:last-child span {
@@ -202,7 +202,7 @@
 	.c-white {
 		color:#fff;
 	}
-	.pay-invoices label > input[type="checkbox"], .pay-invoices label > input[type="checkbox"] {
+	.pay-invoices label > input[type="checkbox"] {
 	    display: none;
 	}
 
@@ -220,18 +220,31 @@
 		border:2px solid #4d4f53;
 	}
 
-	.pay-invoices input[type="checkbox"]:checked + span:before, .pay-invoices input[type="checkbox"]:checked + span:before {
-	    content: "\2714";
-	    color: #fff;
-	    animation: pop 180ms ease-in;
-	    -webkit-animation: pop 180ms ease-in;
+	.pay-invoices input[type="checkbox"]:checked + span:before {
+	     content: '';
+		  position: absolute;
+		  left: 5px;
+		  top: 12px;
+		  background: #fff;
+		  width: 2px;
+		  height: 2px;
+		  box-shadow: 2px 0 0 #fff, 4px 0 0 #fff, 4px -2px 0 #fff, 4px -4px 0 #fff, 4px -6px 0 #fff, 4px -8px 0 #fff;
+		  -webkit-transform: rotate(45deg) scale(1.5);
+          transform: rotate(45deg) scale(1.5);
 	}
 
-	.pay-invoices .select-all input[type="checkbox"]:checked + span:before, .pay-invoices .select-all input[type="checkbox"]:checked + span:before {
+	.pay-invoices .select-all input[type="checkbox"]:checked + span:before {
+		top:10px;
+		left:3px;
+		background:#4d4f53;
+		box-shadow: 2px 0 0 #4d4f53, 4px 0 0 #4d4f53, 4px -2px 0 #4d4f53, 4px -4px 0 #4d4f53, 4px -6px 0 #4d4f53, 4px -8px 0 #4d4f53;
+	}
+
+	.pay-invoices .select-all input[type="checkbox"]:checked + span:before {
 		color:#4d4f53;
 	}
 
-	.pay-invoices input[type="checkbox"] + span:before, .pay-invoices input[type="checkbox"] + span:before {
+	.pay-invoices input[type="checkbox"] + span:before {
 	    display: block;
 	    font-weight: normal;
 	    position: absolute;
@@ -241,6 +254,8 @@
 	    color: #d1d1d1;
 	    cursor: pointer;
 	}
+
+
 
 	@keyframes pop {
 	  0% {
@@ -323,7 +338,7 @@
 				'late-30' : invoice.daysPastDue > 30 && invoice.daysPastDue < 60, 
 				'late-15' : invoice.daysPastDue > 15 && invoice.daysPastDue < 30}">
 				<div class="row">
-					<span class="left c-white">PO#: {{invoice.po}}</span>
+					<span class="left c-white">{{invoice.invoice}}</span>
 					<span class="right">						
 						<!--<input type="checkbox" class="chkbox" ng-click="addInvoice(invoice, $event)" id="i-{{invoice.invoice}}"/>-->
 						<label>
@@ -331,6 +346,9 @@
                             <span></span>
                         </label>
 					</span>
+				</div>
+					<div class="row">
+					<span class="left c-white">PO#: {{invoice.po}}</span>
 				</div>
 				<div class="row">
 					<span class="left c-white">{{invoice.amount | currency}}</span>
@@ -344,7 +362,7 @@
 	</div>
 	<div class="invoice-bar">
 		<label>Amount: </label>
-		<input type="text"
+		<input type="number"
 				ng-model="tempInvoiceAmount"
 				decimals="2"
 				placeholder="0.00" />

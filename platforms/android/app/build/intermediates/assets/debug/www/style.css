@@ -9,10 +9,10 @@ select:focus {outline:none;}
 button, select {-webkit-appearance: none;}
 
 .container {
-  max-width:350px;
+  max-width:400px;
   width:100%;
   margin:0 auto;
-  padding:70px 20px 0 20px;
+  padding:80px 20px 0 20px;
   height:100vh;
 }
 
@@ -888,7 +888,7 @@ navigation ul li span {
     position: relative;
   }
   ._720kb-datepicker-calendar {
-    background: white;
+    background: #cfd3d6;
     color: #333;
     position: absolute;
     z-index: 999;
@@ -901,11 +901,15 @@ navigation ul li span {
     visibility: hidden;
     overflow:hidden;
     margin-left:-0.5%;
-    padding: 0 0 2% 0;
+    padding: 0;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     top:41px;
+    border-bottom: 2px solid #cfd3d6;
+    border-left: 2px solid #cfd3d6;
+    border-right: 2px solid #cfd3d6;
+
   }
   ._720kb-datepicker-calendar._720kb-datepicker-open,._720kb-datepicker-calendar._720kb-datepicker-forced-to-open {
     visibility: visible;
@@ -951,9 +955,10 @@ navigation ul li span {
     transform: rotate(180deg);
   }
   ._720kb-datepicker-calendar-body {
-    width: 96%;
-    margin: 2%;
+    width: 100%;
+    margin: 0;
     text-align: center;
+    background:#fff;
   }
   ._720kb-datepicker-calendar-day {
     cursor: pointer;

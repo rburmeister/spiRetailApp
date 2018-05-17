@@ -2,7 +2,7 @@
 	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
 
 	.container {
-		max-width:350px;
+		max-width:400px;
 		width:100%;
 	}
 
@@ -285,7 +285,7 @@
 			</div>
 			<div class="row row-50">
 				<label>Zip</label>
-				<input type="text" 
+				<input type="number" 
 				ng-model="item.zip"
 				placeholder="Zip Code" />
 			</div>			
@@ -303,13 +303,13 @@
 			</div>
 			<div class="row">
 				<label>Routing Number</label>
-				<input type="number" 
+				<input type="tel"
 				ng-model="item.routingNumber"
 				placeholder="Routing Number" />
 			</div>
 			<div class="row">
 				<label>Account Number</label>
-				<input type="number" 
+				<input type="tel"
 				ng-model="item.accountNumber"
 				placeholder="Account Number" />
 			</div>	

@@ -222,6 +222,8 @@ retailApp.controller('topController', ['$scope', '$location', '$timeout', '$root
         localStorage.setItem("store", "");
         localStorage.setItem("account", "");
         localStorage.setItem("sessionId", "");
+        localStorage.setItem("tempInvoiceAmount", "");
+        localStorage.setItem("invoiceIds", "");
         $scope.errorMsg = "Your session has expired. Please login again.";
         $scope.serverError = true;
         $timeout( function(){
@@ -235,6 +237,8 @@ retailApp.controller('topController', ['$scope', '$location', '$timeout', '$root
         localStorage.setItem("store", "");
         localStorage.setItem("account", "");
         localStorage.setItem("sessionId", "");
+        localStorage.setItem("tempInvoiceAmount", "");
+        localStorage.setItem("invoiceIds", "");
     });
 
      $rootScope.$on('pageLoading', function(event){
@@ -1260,7 +1264,7 @@ retailApp.controller('orderStatusController', ['$scope', '$location', '$routePar
 
 }]);
 
-retailApp.controller('invoicesController', ['$scope', '$location', '$routeParams', '$http', '$timeout', '$window', '$rootScope', 'Session', 'Server', 'lodash', function($scope, $location, $routeParams, $http, $timeout, $window, $rootScope, Session, Server, lodash) {
+retailApp.controller('invoicesController', ['$scope', '$location', '$routeParams', '$http', '$timeout', '$window', '$rootScope', 'Session', 'Server', 'lodash', '$filter', function($scope, $location, $routeParams, $http, $timeout, $window, $rootScope, Session, Server, lodash, $filter) {
     
       
 
@@ -1343,6 +1347,10 @@ retailApp.controller('invoicesController', ['$scope', '$location', '$routeParams
 
       $scope.payInvoices = function(amount) {
         if(amount > 0) {
+          $scope.tempInvoiceAmount = $filter('currency')(amount);
+          $scope.tempInvoiceAmount = $scope.tempInvoiceAmount.replace(",", "");
+          $scope.tempInvoiceAmount = $scope.tempInvoiceAmount.replace("$", "");
+
           localStorage.setItem("invoiceAmount", $scope.tempInvoiceAmount);
           localStorage.setItem("tempInvoiceAmount", $scope.tempInvoiceAmount);
           localStorage.setItem("invoiceIds", "");
@@ -1910,7 +1918,7 @@ retailApp.directive('datePicker', function ($timeout) {
     template: '<div class="datepicker" date-format="MM/dd/yyyy"' +
                 'date-set="{{tempStartDate}}">' +
                 // 'date-disabled-dates="{{ disabledDates }}">' +
-                '<input type="text" id="date-change-picker" readonly="readonly"' +
+                '<input type="text" id="date-change-picker"   readonly="readonly"' +
                 'ng-model="item.startDate" ' +
                 'placeholder="Start Date:" />' +
               '</div>',
@@ -2100,10 +2108,11 @@ retailApp.factory('Server', ['$http', function ServerFactory($http) {
 
       function getOrdersSearch(sessionId, searchValue) {
         var applicationName = "SPI_APP";
+        var data = '{"Columns":[{"Name": "SessionID","Type":"String"},{"Name":"ApplicationName","Type":"String"},{"Name":"SearchValue","Type":"String"}],"Rows":[["' + sessionId + '","' + applicationName + '","' + searchValue + '"]]}';
         var sessionId = localStorage.getItem("sessionId");
           return $http({
               url: 'https://www.spiconnect.net/APPRESTWcfService/RestService.svc/CheckOrderStatus',
-              data: '{"Columns":[{"Name": "SessionID","Type":"String"},{"Name":"ApplicationName","Type":"String"},{"Name":"SearchValue","Type":"String"}],"Rows":[["' + sessionId + '","' + applicationName + '","' + searchValue + '"]]}',
+              data: data,
               method: 'POST'
           }).then(
                function successFn(response) {

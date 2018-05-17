@@ -2,7 +2,7 @@
 	* {margin:0; padding:0; box-sizing:border-box; line-height:1;}
 
 	.container {
-		max-width:350px;
+		max-width:400px;
 		width:100%;
 	}
 
@@ -55,9 +55,10 @@
 	}
 
 	.form .inline.row label {
-		display:inline-block;
-		margin: 6px 0 0 10px;
+		float:left;
+		margin: 6px 0 0 0;
 		font-size:18px;
+		position:relative;
 	}
 
 	.form input {
@@ -111,22 +112,22 @@
 
 	.alert {
 	    width: 100%;
-	    height: 40px;
+	    height: auto;
 	    position: fixed;
 	    background: #D34040;
 	    z-index: 11;
 	    top: 0;
 	    padding: 0 20px;
-	    line-height: 40px;
 	    color: #fff;
 	    font-size: 14px;
-	    transform:translateY(-40px);
+	    transform:translateY(-200px);
+	    -webkit-transform:translateY(-200px);
 	}
 
 	.alert span {
 		display:block;
-		height: 40px;
-	    line-height: 40px;
+		padding:10px 0;
+		line-height:1.2;
 	}
 
 	.alert span:first-letter {
@@ -137,6 +138,47 @@
 		animation-fill-mode: forwards;
 	}
 
+	.form label > input[type="checkbox"] {
+	    opacity:0;
+	}
+
+	.form label span {
+	    display: block;
+	    width: 25px;
+	    height: 25px;
+	    border: 2px solid #fff;
+	    border-radius:5px;
+	}
+
+	.form input[type="checkbox"]:checked + span:before {
+	     content: '';
+		  position: absolute;
+		  left: 5px;
+		  top: 12px;
+		  background: #fff;
+		  width: 2px;
+		  height: 2px;
+		  box-shadow: 2px 0 0 #fff, 4px 0 0 #fff, 4px -2px 0 #fff, 4px -4px 0 #fff, 4px -6px 0 #fff, 4px -8px 0 #fff;
+		  -webkit-transform: rotate(45deg) scale(1.5);
+          transform: rotate(45deg) scale(1.5);
+	}
+
+	.form input[type="checkbox"] + span:before {
+	    display: block;
+	    font-weight: normal;
+	    position: absolute;
+	    right: 3px;
+	    top: 1px;
+	    font-size: 23px;
+	    color: #d1d1d1;
+	    cursor: pointer;
+	}
+
+	.form p {
+		float:left;
+	    padding:10px 0 0 10px;
+	    color:#fff;
+	}
 </style>
 
 <div class="alert" ng-class="{'active' : serverError}">
@@ -151,7 +193,7 @@
 		<!-- Company Logo -->
 		<div class="logo">
 			<brand-logo></brand-logo>
-			<span>Version 1.0.6</span>
+			<span>Version 1.0.8</span>
 		</div>
 		<!-- User Login Form -->
 		<div class="form">
@@ -171,11 +213,14 @@
 					placeholder="Enter password" />
 			</div>
 			<div class="row inline">
-				<label>Always Remember</label>
+				<label>
 				<input type="checkbox" 
 					placeholder=""
 					ng-model="item.rememberMe"
 					class="chkbox"/>
+					<span></span>
+				</label>
+				<p>Always Remember</p>
 			</div>
 			<div class="row">
 				<button type="submit" ng-click="login(item)">Login</button>
