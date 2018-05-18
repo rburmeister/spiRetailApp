@@ -504,6 +504,23 @@ navigation ul li span {
     background: none;
 }
 
+.alert error-icon svg, .alert success-icon svg {
+    width: 32px;
+    float: left;
+    margin: 10px 10px 0 0;
+}
+
+.alert span {
+    display: block;
+    padding: 10px 0;
+    line-height: 1.2;
+    width: calc(100% - 45px);
+}
+
+.alert error-icon .path, .alert success-icon .path {
+    stroke: #fff;
+}
+
 /*
 .st1{
   fill:#ccc;
